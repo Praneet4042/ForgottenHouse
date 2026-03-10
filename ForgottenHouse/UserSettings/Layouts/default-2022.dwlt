@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,11 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-<<<<<<< Updated upstream
-  controlID: 46
-=======
-  controlID: 96
->>>>>>> Stashed changes
+  controlID: 36
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -149,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 47
+  controlID: 37
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -419,15 +415,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-<<<<<<< Updated upstream
-      m_SelectedIDs: 585b0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2ef8ffff7af8ffffdcf8ffff28f9ffff74f9ffffe8f9ffff24fbffff
-=======
-      m_SelectedIDs: 0e5b0000
-      m_LastClickedID: 23310
-      m_ExpandedIDs: 2efbffff
->>>>>>> Stashed changes
+      m_ExpandedIDs: faf7ffffbaf8ffffccf9ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -859,9 +849,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 9.175559, y: 1.6420404, z: -1.4249365}
+    m_Target: {x: 4.704524, y: -4.140544, z: -11.458223}
     speed: 2
-    m_Value: {x: 9.175559, y: 1.6420404, z: -1.4249365}
+    m_Value: {x: 4.704524, y: -4.140544, z: -11.458223}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -907,11 +897,11 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.052551806, y: 0.93774986, z: -0.16310552, w: 0.30214694}
+    m_Target: {x: -0.030894589, y: 0.96129256, z: -0.24567312, w: -0.12088798}
     speed: 2
-    m_Value: {x: 0.052188374, y: 0.9379297, z: -0.16197748, w: 0.3022049}
+    m_Value: {x: -0.031189272, y: 0.96114343, z: -0.24563502, w: -0.12204105}
   m_Size:
-    m_Target: 1.3932337
+    m_Target: 10
     speed: 2
     m_Value: 1.3932337
   m_Ortho:
@@ -993,20 +983,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scenes
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\GIT\ForgottenHouse\ForgottenHouse
+  m_LastProjectPath: C:\GameJam\ForgottenHouse\ForgottenHouse
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-<<<<<<< Updated upstream
-    m_SelectedIDs: 565b0000
-    m_LastClickedID: 23382
-    m_ExpandedIDs: 000000004c5b0000
-=======
-    m_SelectedIDs: 545b0000
-    m_LastClickedID: 23380
-    m_ExpandedIDs: 000000004a5b000000ca9a3bffffff7f
->>>>>>> Stashed changes
+    m_SelectedIDs: ee1f0000
+    m_LastClickedID: 8174
+    m_ExpandedIDs: 00000000b45b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1034,11 +1018,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-<<<<<<< Updated upstream
-    m_ExpandedIDs: 000000004c5b0000
-=======
-    m_ExpandedIDs: 000000004a5b0000
->>>>>>> Stashed changes
+    m_ExpandedIDs: 00000000b45b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1065,7 +1045,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300005aaa0000e6ab000066cc0000ba020000165d00004a5d000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
