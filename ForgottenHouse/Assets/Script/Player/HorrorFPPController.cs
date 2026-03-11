@@ -5,7 +5,7 @@ public class HorrorFPPController : MonoBehaviour
     [Header("Movement")]
     public float walkSpeed = 4f;
     public float runSpeed = 7f;
-    public float jumpForce = 6f;
+    public float jumpForce = 2f;   // this is jump height now
     public float gravity = -20f;
 
     [Header("Mouse")]
@@ -58,7 +58,7 @@ public class HorrorFPPController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
         {
-            velocity.y = jumpForce;
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
 
         velocity.y += gravity * Time.deltaTime;
