@@ -43,27 +43,7 @@ public class BonfireManager : MonoBehaviour
 
     void Update()
     {
-        if (worldPrompt != null && Camera.main != null)
-        {
-            Vector3 dirToCamera = Camera.main.transform.position -
-                                  worldPrompt.transform.position;
-            worldPrompt.transform.rotation = Quaternion.LookRotation(-dirToCamera);
-            Debug.Log("Rotating prompt: " + worldPrompt.transform.rotation.eulerAngles);
-        }
-        if (worldPrompt != null && Camera.main != null)
-        {
-            worldPrompt.transform.LookAt(Camera.main.transform.position);
-            worldPrompt.transform.Rotate(0, 180f, 0);
-        }
-
         
-        if (_completed || _player == null) return;
-
-        // Face camera
-        // Face camera
-        if (worldPrompt != null && Camera.main != null)
-            worldPrompt.transform.LookAt(
-                2 * worldPrompt.transform.position - Camera.main.transform.position);
 
         bool lanternOn = LanternToggle.instance != null &&
                          LanternToggle.instance.isOn;
@@ -127,7 +107,6 @@ public class BonfireManager : MonoBehaviour
 
         Debug.Log($"[Bonfire] {_dollsDestroyed}/{totalDolls} dolls destroyed!");
 
-        // Check if all done
         if (_dollsDestroyed >= totalDolls)
         {
             _completed = true;
@@ -137,7 +116,11 @@ public class BonfireManager : MonoBehaviour
                 progressText.text = $"{totalDolls}/{totalDolls} DOLLS DESTROYED!";
             Debug.Log("[Bonfire] All dolls destroyed! Task counted.");
             StartCoroutine(HideCompletionText());
+            return; // stop here
         }
+
+        // Clear prompt after throwing
+        if (worldPrompt != null) worldPrompt.text = "";
     }
     IEnumerator HideCompletionText()
     {

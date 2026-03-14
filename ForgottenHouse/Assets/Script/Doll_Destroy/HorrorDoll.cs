@@ -32,21 +32,7 @@ public class HorrorDoll : MonoBehaviour
 
     void Update()
     {
-        if (worldPrompt != null && Camera.main != null)
-        {
-            worldPrompt.transform.LookAt(Camera.main.transform.position);
-            worldPrompt.transform.Rotate(0, 180f, 0);
-        }
-
         
-        if (_pickedUp || _player == null) return;
-
-        // Face camera
-        // Face camera
-        if (worldPrompt != null && Camera.main != null)
-            worldPrompt.transform.LookAt(
-                2 * worldPrompt.transform.position - Camera.main.transform.position);
-
         bool lanternOn = LanternToggle.instance != null &&
                          LanternToggle.instance.isOn;
         float dist = Vector3.Distance(
