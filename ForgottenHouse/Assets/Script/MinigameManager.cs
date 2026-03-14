@@ -10,17 +10,16 @@ public class MinigameManager : MonoBehaviour
         Instance = this;
     }
 
-    public void StartMinigame(GameObject ui = null)
+    public void StartMinigame(GameObject panel, bool showCursor = true)
     {
-        if (ui != null) ui.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Debug.Log("Minigame Started");
+        if (panel != null) panel.SetActive(true);
+        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = showCursor;
     }
 
-    public void EndMinigame(GameObject ui = null)
+    public void EndMinigame(GameObject panel)
     {
-        if (ui != null) ui.SetActive(false);
+        if (panel != null) panel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Debug.Log("Minigame Ended");
