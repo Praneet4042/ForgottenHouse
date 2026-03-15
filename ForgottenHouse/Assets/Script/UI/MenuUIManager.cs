@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -55,5 +56,14 @@ public class MenuManager : MonoBehaviour
     {
         panel4.SetActive(false);
         mainMenuPanel.SetActive(true);
+    }
+    public void StartGame()
+    {
+        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene(nextScene);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
