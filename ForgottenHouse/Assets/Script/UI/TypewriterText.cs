@@ -5,15 +5,26 @@ using UnityEngine;
 public class TypewriterText : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
-    public float typingSpeed = 0.03f;
+    public float typingSpeed = 0.02f;
 
-    [TextArea]
-    public string fullText;
+    private string fullText;
+    private Coroutine typingCoroutine;
+
+    void Awake()
+    {
+        
+        fullText = textComponent.text;
+    }
 
     void OnEnable()
     {
+        StartTyping();
+    }
+
+    public void StartTyping()
+    {
         StopAllCoroutines();
-        StartCoroutine(TypeText());
+        typingCoroutine = StartCoroutine(TypeText());
     }
 
     IEnumerator TypeText()
@@ -25,5 +36,12 @@ public class TypewriterText : MonoBehaviour
             textComponent.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+    }
+
+    // Instantly finish the typing
+    public void CompleteText()
+    {
+        StopAllCoroutines();
+        textComponent.text = fullText;
     }
 }

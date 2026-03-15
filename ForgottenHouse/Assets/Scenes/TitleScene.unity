@@ -508,14 +508,14 @@ PrefabInstance:
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Panel2ToPanel3
+      value: Next2
       objectReference: {fileID: 0}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InstructionsPanel, Assembly-CSharp
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -633,14 +633,14 @@ PrefabInstance:
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Panel3ToPanel4
+      value: Next3
       objectReference: {fileID: 0}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InstructionsPanel, Assembly-CSharp
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -907,7 +907,11 @@ PrefabInstance:
       objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMainMenu
+      value: ReturnToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1416,14 +1420,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321318755}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac2b3a1f57e619b41a785e3f0c57e377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 2142771891}
-  typingSpeed: 0.05
-  fullText: 
+  typingSpeed: 0.02
 --- !u!224 &333787478 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4569840712088398844, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
@@ -1440,6 +1443,7 @@ GameObject:
   - component: {fileID: 361035269}
   - component: {fileID: 361035268}
   - component: {fileID: 361035267}
+  - component: {fileID: 361035270}
   m_Layer: 5
   m_Name: HowToPlayPanel (2)
   m_TagString: Untagged
@@ -1509,6 +1513,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &361035270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361035266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2b3a1f57e619b41a785e3f0c57e377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 1389406018}
+  typingSpeed: 0.02
 --- !u!224 &404645704 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4569840712088398844, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
@@ -1576,11 +1594,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "SURVIVAL RULES\r\n\u26A0 Your health drains constantly \u2014 work fast!\r\n\u26A0
-    The ghost CHASES you when your lantern is ON\r\n\u26A0 Turn lantern OFF to hide
-    from the ghost\r\n\u26A0 You can only interact with objects when lantern is ON\r\n\u26A0
-    The ghost KILLS you if it gets too close\r\n\u26A0 Find pill boxes near unlocked
-    doors to restore health\r\r\n"
+  m_text: "SURVIVAL RULES\r\n\u25BA Your health drains constantly \u2014 work fast!\r\n\u25BA 
+    The ghost CHASES you when your lantern is ON\r\n\u25BA Turn lantern OFF to hide
+    from the ghost\r\n\u25BA  You can only interact with objects when lantern is
+    ON\r\n\u25BA  The ghost KILLS you if it gets too close\r\n\u25BA  Find pill boxes
+    near unlocked doors to restore health\r\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3af6bc41632ff304eac13484b36b1267, type: 2}
   m_sharedMaterial: {fileID: -5479742775250729056, guid: 3af6bc41632ff304eac13484b36b1267, type: 2}
@@ -2253,14 +2271,14 @@ PrefabInstance:
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Panel3ToPanel2
+      value: Back2
       objectReference: {fileID: 0}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InstructionsPanel, Assembly-CSharp
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2490,7 +2508,11 @@ PrefabInstance:
       objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMainMenu
+      value: ReturnToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3836,6 +3858,10 @@ MonoBehaviour:
   panel2: {fileID: 2047815706}
   panel3: {fileID: 361035266}
   panel4: {fileID: 2028556149}
+  panel1Text: {fileID: 321318759}
+  panel2Text: {fileID: 2047815710}
+  panel3Text: {fileID: 361035270}
+  panel4Text: {fileID: 2028556153}
 --- !u!1001 &1316958873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3943,14 +3969,14 @@ PrefabInstance:
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Panel4ToPanel3
+      value: Back3
       objectReference: {fileID: 0}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InstructionsPanel, Assembly-CSharp
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4066,13 +4092,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackToMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 5742293570208436757, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMainMenu
+      value: ReturnToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4326,7 +4360,11 @@ PrefabInstance:
       objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMainMenu
+      value: ReturnToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4708,14 +4746,14 @@ PrefabInstance:
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1312664364}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Panel3ToPanel2
+      value: Back1
       objectReference: {fileID: 0}
     - target: {fileID: 8550435362178982656, guid: fc23d0b9dfc0e7145ac7dd9d2c74a7b5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InstructionsPanel, Assembly-CSharp
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6438,6 +6476,7 @@ GameObject:
   - component: {fileID: 2028556150}
   - component: {fileID: 2028556152}
   - component: {fileID: 2028556151}
+  - component: {fileID: 2028556153}
   m_Layer: 5
   m_Name: HowToPlayPanel (3)
   m_TagString: Untagged
@@ -6507,6 +6546,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028556149}
   m_CullTransparentMesh: 1
+--- !u!114 &2028556153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028556149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2b3a1f57e619b41a785e3f0c57e377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 1963803839}
+  typingSpeed: 0.02
 --- !u!1 &2047815706
 GameObject:
   m_ObjectHideFlags: 0
@@ -6595,14 +6648,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047815706}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac2b3a1f57e619b41a785e3f0c57e377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 420869695}
-  typingSpeed: 0.05
-  fullText: 
+  typingSpeed: 0.02
 --- !u!1 &2084106011
 GameObject:
   m_ObjectHideFlags: 0
