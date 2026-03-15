@@ -3,41 +3,59 @@ using TMPro;
 
 public class FuseBoxInteract : MonoBehaviour
 {
-    public FuseBoxMinigame minigame;
-    public TextMeshProUGUI interactPrompt;
-    private bool _inRange;
-    private bool _completed; // ADD THIS
+    [Header("Asset to Glow")]
+    public Outline assetOutline;
+    [Header("Settings")]
+    public float interactRange = 10f;
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _inRange = true;
-            if (interactPrompt != null)
-                interactPrompt.text = _completed ? "" : "[E] Inspect Fuse Box";
-        }
-    }
+    [Header("Prompt + Glow")]
+    public TextMeshPro worldPrompt;
+    private Outline _outline;
 
-    void OnTriggerExit(Collider other)
+    private bool _inRange = false;
+    private bool _completed = false;
+    private Transform _player;
+    private FuseBoxMinigame _minigame;
+
+    void Start()
     {
-        if (other.CompareTag("Player"))
-        {
-            _inRange = false;
-            if (interactPrompt != null)
-                interactPrompt.text = "";
-        }
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _minigame = GetComponentInParent<FuseBoxMinigame>();
+        if (_minigame == null)
+            _minigame = FindObjectOfType<FuseBoxMinigame>();
+
+        _outline = assetOutline;
+        if (_outline != null) _outline.enabled = false;
+
+        if (worldPrompt != null) worldPrompt.text = "";
     }
 
     void Update()
     {
-        if (_inRange && !_completed && Input.GetKeyDown(KeyCode.E))
-            minigame.OpenMinigame();
+        if (_completed || _player == null) return;
+
+        if (worldPrompt != null && Camera.main != null)
+            worldPrompt.transform.rotation = Camera.main.transform.rotation;
+
+        bool lanternOn = LanternToggle.instance != null &&
+                         LanternToggle.instance.isOn;
+        float dist = Vector3.Distance(_player.position, transform.position);
+        _inRange = dist <= interactRange;
+
+        bool showPrompt = _inRange && lanternOn;
+        if (_outline != null) _outline.enabled = showPrompt;
+        if (worldPrompt != null)
+            worldPrompt.text = showPrompt ? "[F] Inspect Fuse Box" : "";
+
+        if (_inRange && lanternOn && Input.GetKeyDown(KeyCode.F))
+            if (_minigame != null)
+                _minigame.StartMinigameFromInteract();
     }
 
     public void SetCompleted()
     {
         _completed = true;
-        if (interactPrompt != null)
-            interactPrompt.text = "";
+        if (_outline != null) _outline.enabled = false;
+        if (worldPrompt != null) worldPrompt.text = "";
     }
 }

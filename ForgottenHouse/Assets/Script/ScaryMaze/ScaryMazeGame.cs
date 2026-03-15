@@ -5,6 +5,8 @@ using System.Collections;
 
 public class ScaryMazeGame : MonoBehaviour
 {
+    [Header("Asset to Glow")]
+    public Outline assetOutline;
     [Header("Main Panel")]
     public GameObject mazeGamePanel;
 
@@ -39,6 +41,10 @@ public class ScaryMazeGame : MonoBehaviour
     [Header("Interact")]
     public float interactRange = 15f;
 
+    [Header("Prompt + Glow")]
+    public TextMeshPro worldPrompt;
+    private Outline _outline;
+
     // private
     int currentLevel = 1;
     bool gameActive = false;
@@ -51,13 +57,20 @@ public class ScaryMazeGame : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
-        jumpscarePanel.SetActive(false);
-        mazeGamePanel.SetActive(false);
+        if (jumpscarePanel != null) jumpscarePanel.SetActive(false);
+        if (mazeGamePanel != null) mazeGamePanel.SetActive(false);
+
+        _outline = assetOutline;
+        if (_outline != null) _outline.enabled = false;
+
+        if (worldPrompt != null) worldPrompt.text = "";
     }
 
     void Update()
     {
-        // Interact trigger
+        if (worldPrompt != null && Camera.main != null)
+            worldPrompt.transform.rotation = Camera.main.transform.rotation;
+
         if (!_completed && !gameActive &&
             mazeGamePanel != null && !mazeGamePanel.activeSelf)
         {
@@ -68,8 +81,21 @@ public class ScaryMazeGame : MonoBehaviour
                 _playerInRange = dist <= interactRange;
             }
 
-            if (_playerInRange && Input.GetKeyDown(KeyCode.P))
+            bool lanternOn = LanternToggle.instance != null &&
+                             LanternToggle.instance.isOn;
+
+            bool showPrompt = _playerInRange && lanternOn;
+            if (_outline != null) _outline.enabled = showPrompt;
+            if (worldPrompt != null)
+                worldPrompt.text = showPrompt ? "[F] Play Maze" : "";
+
+            if (_playerInRange && lanternOn && Input.GetKeyDown(KeyCode.F))
                 OnInteract();
+        }
+        else
+        {
+            if (_outline != null) _outline.enabled = false;
+            if (worldPrompt != null) worldPrompt.text = "";
         }
 
         if (jumpscared) return;
@@ -82,7 +108,7 @@ public class ScaryMazeGame : MonoBehaviour
         }
         else
         {
-            if (mazeGamePanel.activeSelf)
+            if (mazeGamePanel != null && mazeGamePanel.activeSelf)
                 CheckMouseOnSpawn();
         }
     }
@@ -117,26 +143,13 @@ public class ScaryMazeGame : MonoBehaviour
         level1Maze.SetActive(false);
         level2Maze.SetActive(false);
         level3Maze.SetActive(false);
-
         currentLevel = level;
         levelText.text = "Level " + level;
         playerDot.anchoredPosition = new Vector2(-380, 360);
 
-        if (level == 1)
-        {
-            level1Maze.SetActive(true);
-            currentGoal = goalZone_L1;
-        }
-        else if (level == 2)
-        {
-            level2Maze.SetActive(true);
-            currentGoal = goalZone_L2;
-        }
-        else if (level == 3)
-        {
-            level3Maze.SetActive(true);
-            currentGoal = goalZone_L3;
-        }
+        if (level == 1) { level1Maze.SetActive(true); currentGoal = goalZone_L1; }
+        else if (level == 2) { level2Maze.SetActive(true); currentGoal = goalZone_L2; }
+        else if (level == 3) { level3Maze.SetActive(true); currentGoal = goalZone_L3; }
     }
 
     void CheckMouseOnSpawn()
@@ -144,13 +157,9 @@ public class ScaryMazeGame : MonoBehaviour
         Vector2 mousePos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             mazeGamePanel.GetComponent<RectTransform>(),
-            Input.mousePosition,
-            null,
-            out mousePos
-        );
+            Input.mousePosition, null, out mousePos);
 
         float distance = Vector2.Distance(mousePos, new Vector2(-380, 360));
-
         if (distance < 20f)
         {
             gameActive = true;
@@ -167,10 +176,7 @@ public class ScaryMazeGame : MonoBehaviour
         Vector2 pos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             mazeGamePanel.GetComponent<RectTransform>(),
-            Input.mousePosition,
-            null,
-            out pos
-        );
+            Input.mousePosition, null, out pos);
         playerDot.anchoredPosition = pos;
     }
 
@@ -178,9 +184,7 @@ public class ScaryMazeGame : MonoBehaviour
     {
         Image[] walls = currentLevel == 1 ? level1Walls :
                         currentLevel == 2 ? level2Walls : level3Walls;
-
         Rect dot = GetRect(playerDot);
-
         foreach (Image wall in walls)
         {
             if (dot.Overlaps(GetRect(wall.rectTransform)))
@@ -224,18 +228,15 @@ public class ScaryMazeGame : MonoBehaviour
     {
         if (currentLevel == 3)
         {
-            // Count task regardless of win or fail on level 3
             if (!_completed)
             {
                 _completed = true;
                 TaskManager.Instance?.TaskCompleted();
-                Debug.Log("[ScaryMaze] Completed! Task counted.");
             }
             TriggerJumpscare();
         }
         else
         {
-            // Silent restart from level 1
             jumpscared = false;
             gameActive = false;
             LoadLevel(1);
@@ -248,13 +249,10 @@ public class ScaryMazeGame : MonoBehaviour
         if (jumpscared) return;
         jumpscared = true;
         gameActive = false;
-
         jumpscarePanel.SetActive(true);
         Cursor.visible = true;
-
         if (jumpscareSound != null)
             audioSource.PlayOneShot(jumpscareSound);
-
         StartCoroutine(AutoCloseAfterJumpscare());
     }
 
@@ -277,11 +275,8 @@ public class ScaryMazeGame : MonoBehaviour
     {
         Vector3[] corners = new Vector3[4];
         rt.GetWorldCorners(corners);
-        return new Rect(
-            corners[0].x,
-            corners[0].y,
+        return new Rect(corners[0].x, corners[0].y,
             corners[2].x - corners[0].x,
-            corners[2].y - corners[0].y
-        );
+            corners[2].y - corners[0].y);
     }
 }
