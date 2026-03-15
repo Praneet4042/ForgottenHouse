@@ -3,7 +3,12 @@ guid: aea0639a2cc310d44b062ab0715ee473
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: creepydresser3dmodel_basecolor
+    second: {fileID: 2800000, guid: a29b3639ef4d6284fb1639811628e920, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

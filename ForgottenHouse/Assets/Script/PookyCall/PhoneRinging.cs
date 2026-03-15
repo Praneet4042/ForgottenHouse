@@ -19,6 +19,10 @@ public class PhoneRinging : MonoBehaviour
     [Header("── References ──")]
     public PhoneCallManager callManager;
 
+    [Header("Prompt + Glow")]
+    public TextMeshPro worldPrompt;
+    private Outline _outline;
+
     // private
     private bool isRinging = false;
     private bool callAnswered = false;
@@ -28,11 +32,21 @@ public class PhoneRinging : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform;
-        if (promptUI) promptUI.SetActive(false);
+        if (promptUI != null) promptUI.SetActive(false);
+
+        _outline = GetComponentInChildren<Outline>();
+        if (_outline == null)
+            _outline = GetComponentInParent<Outline>();
+        if (_outline != null) _outline.enabled = false;
+
+        if (worldPrompt != null) worldPrompt.text = "";
     }
 
     void Update()
     {
+        if (worldPrompt != null && Camera.main != null)
+            worldPrompt.transform.rotation = Camera.main.transform.rotation;
+
         if (callAnswered) return;
 
         float dist = _player != null ?
@@ -50,11 +64,18 @@ public class PhoneRinging : MonoBehaviour
             StopRinging();
         }
 
-        if (promptUI)
-            promptUI.SetActive(isRinging && dist <= interactRange);
+        bool lanternOn = LanternToggle.instance != null &&
+                         LanternToggle.instance.isOn;
 
-        if (isRinging && dist <= interactRange &&
-            Input.GetKeyDown(KeyCode.C))
+        bool showPrompt = isRinging && dist <= interactRange && lanternOn;
+        if (_outline != null) _outline.enabled = showPrompt;
+        if (worldPrompt != null)
+            worldPrompt.text = showPrompt ? "[F] Answer Phone" : "";
+
+        if (promptUI) promptUI.SetActive(false);
+
+        if (isRinging && dist <= interactRange && lanternOn &&
+            Input.GetKeyDown(KeyCode.F))
             AnswerCall();
     }
 
@@ -108,6 +129,8 @@ public class PhoneRinging : MonoBehaviour
         StopAllCoroutines();
         if (audioSource) audioSource.Stop();
         if (promptUI) promptUI.SetActive(false);
+        if (_outline != null) _outline.enabled = false;
+        if (worldPrompt != null) worldPrompt.text = "";
     }
 
     void AnswerCall()
@@ -115,7 +138,6 @@ public class PhoneRinging : MonoBehaviour
         callAnswered = true;
         StopRinging();
         if (callManager) callManager.StartCall();
-        else Debug.LogError("[PhoneRinging] PhoneCallManager not assigned!");
     }
 
     public void ResetPhone()

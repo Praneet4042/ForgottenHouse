@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class FuseBoxMinigame : MonoBehaviour
 {
     [Header("Trigger")]
@@ -38,6 +37,12 @@ public class FuseBoxMinigame : MonoBehaviour
         StartCoroutine(RunMinigame());
     }
 
+    // Called by FuseBoxInteract when F is pressed
+    public void StartMinigameFromInteract()
+    {
+        OpenMinigame();
+    }
+
     IEnumerator RunMinigame()
     {
         _sequence.Clear();
@@ -68,12 +73,10 @@ public class FuseBoxMinigame : MonoBehaviour
     public void OnFusePressed(int idx)
     {
         if (!_accepting) return;
-
         _playerInput.Add(idx);
         StartCoroutine(FlashButton(idx));
 
         int step = _playerInput.Count - 1;
-
         if (_playerInput[step] != _sequence[step])
         {
             StartCoroutine(OnFail());
@@ -105,8 +108,6 @@ public class FuseBoxMinigame : MonoBehaviour
     {
         _accepting = false;
         SetButtonsInteractable(false);
-        Debug.Log("FAIL triggered"); // ADD THIS
-        Debug.Log("ResultText is: " + (resultText == null ? "NULL" : "OK")); // ADD THIS
         resultText.text = "The sequence fails. Try again.";
         resultText.color = Color.red;
         yield return new WaitForSeconds(1.5f);
@@ -122,7 +123,7 @@ public class FuseBoxMinigame : MonoBehaviour
         resultText.color = Color.green;
         yield return new WaitForSeconds(1.5f);
         TaskManager.Instance?.TaskCompleted();
-        interactTrigger?.SetCompleted(); // ADD THIS
+        interactTrigger?.SetCompleted();
         MinigameManager.Instance.EndMinigame(minigamePanel);
     }
 }

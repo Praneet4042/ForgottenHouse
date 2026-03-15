@@ -74,6 +74,10 @@ public class CupGamePuzzle : MonoBehaviour
     [Header("Interact")]
     public float interactRange = 15f;
 
+    [Header("Prompt + Glow")]
+    public TextMeshPro worldPrompt;
+    private Outline _outline;
+
     // private
     private int currentLevel = 1;
     private int coinCupIndex = 0;
@@ -110,17 +114,32 @@ public class CupGamePuzzle : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         // Make sure panel starts hidden
         if (cupGamePanel != null) cupGamePanel.SetActive(false);
+        _outline = GetComponentInChildren<Outline>();
+        if (_outline == null)
+            _outline = GetComponentInParent<Outline>();
+        if (_outline != null) _outline.enabled = false;
+        if (worldPrompt != null) worldPrompt.text = "";
     }
 
     private void Update()
     {
+        if (worldPrompt != null && Camera.main != null)
+            worldPrompt.transform.rotation = Camera.main.transform.rotation;
+
         if (_player == null || puzzleActive || _completed) return;
 
-        float dist = Vector3.Distance(
-            _player.position, transform.position);
+        float dist = Vector3.Distance(_player.position, transform.position);
         _playerInRange = dist <= interactRange;
 
-        if (_playerInRange && Input.GetKeyDown(KeyCode.E))
+        bool lanternOn = LanternToggle.instance != null &&
+                         LanternToggle.instance.isOn;
+
+        bool showPrompt = _playerInRange && lanternOn;
+        if (_outline != null) _outline.enabled = showPrompt;
+        if (worldPrompt != null)
+            worldPrompt.text = showPrompt ? "[F] Play Cup Game" : "";
+
+        if (_playerInRange && lanternOn && Input.GetKeyDown(KeyCode.F))
             OnInteract();
     }
 
