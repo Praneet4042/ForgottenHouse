@@ -48,8 +48,9 @@ public class PlayerCutsceneMove : MonoBehaviour
 
             while (Vector3.Distance(transform.position, target.position) > stopDistance)
             {
-                Vector3 dir = (target.position - transform.position).normalized;
-
+                Vector3 dir = target.position - transform.position;
+                dir.y = 0f;
+                dir.Normalize();
                 // Move
                 transform.position += dir * moveSpeed * Time.deltaTime;
 
